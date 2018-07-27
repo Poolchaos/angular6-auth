@@ -1,9 +1,70 @@
 <h1>Home</h1>
 <p>You're logged in with Angular 6 & JWT!!</p>
-<div>
-    Users from secure api end point:
-    <ul>
-        <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-    </ul>
+<div *ngIf="user">
+  <div *ngIf="static">
+    <div style="float:left;padding: 10px 20px;height: 100%;">
+      <button class="btn btn-link" (click)="enableEdit()">Edit</button>
+    </div>
+    <div>
+      <span>Username:</span>
+      {{user.username}} {{user.surname}}
+    </div>
+    <div>
+      <span>Name:</span>
+      {{user.firstName}} {{user.surname}}
+    </div>
+  </div>
+  <div *ngIf="!static && updateUserFormGroup">
+
+    <form [formGroup]="updateUserFormGroup" (ngSubmit)="update()">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && formData.firstName.errors }" required />
+        <div *ngIf="submitted && formData.firstName.errors" class="invalid-feedback">
+          <div *ngIf="formData.firstName.errors.required">First Name is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="surname">Surname</label>
+        <input type="text" formControlName="surname" class="form-control" [ngClass]="{ 'is-invalid': submitted && formData.surname.errors }" required />
+        <div *ngIf="submitted && formData.surname.errors" class="invalid-feedback">
+          <div *ngIf="formData.surname.errors.required">Surname is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && formData.username.errors }" autocomplete="disabled" required />
+        <div *ngIf="submitted && formData.username.errors" class="invalid-feedback">
+          <div *ngIf="formData.username.errors.required">Username is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && formData.password.errors }" autocomplete="new-password" required />
+        <div *ngIf="submitted && formData.password.errors" class="invalid-feedback">
+          <div *ngIf="formData.password.errors.required">Password is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && formData.confirmPassword.errors }" autocomplete="new-password" required />
+        <div *ngIf="submitted && formData.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="formData.confirmPassword.errors.required">Password is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Update</button>
+        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        <div class="btn btn-dark" (click)="cancel()">Cancel</div>
+      </div>
+    </form>
+
+  </div>
 </div>
+<br/>
 <button class="btn btn-dark" (click)="logout()">Logout</button>
