@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
+          console.log(' >>>> error > ', error);
           switch (error) {
             case 'Not Found': this.error = 'Something went wrong with what you have entered.';
               break;
