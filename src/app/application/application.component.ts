@@ -8,7 +8,7 @@ import { AuthenticationService } from '../_helpers/_services/authentication.serv
 import { UserService } from './../_helpers/_services/user.service';
 
 @Component({templateUrl: 'application.component.html'})
-export class HomeComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
   private user: any;
   private updated = false;
@@ -28,11 +28,6 @@ export class HomeComponent implements OnInit {
 
   get formData() {
     return this.updateUserFormGroup.controls;
-  }
-
-  private logout(): void {
-    this.authenticationService.logout();
-    this.router.navigate(['login']);
   }
 
   private enableEdit(): void {
@@ -87,5 +82,10 @@ export class HomeComponent implements OnInit {
         error => {
           console.log(' failed to update user error = ', error);
         });
+  }
+
+  private logout(): void {
+    this.authenticationService.logout();
+    this.router.navigate(['']);
   }
 }

@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['dashboard']);
         },
         error => {
           console.log(' >>>> error > ', error);
@@ -64,5 +64,9 @@ export class LoginComponent implements OnInit {
 
   private navigateToRegister(): void {
     this.router.navigate(['register']);
+  }
+
+  private leaveVault(): void {
+    this.router.navigate(['']);
   }
 }
