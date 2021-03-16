@@ -1,6 +1,6 @@
 # Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.0.
+This is an Angular 6 login authentication POC
 
 ## Development server
 
